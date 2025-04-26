@@ -1,8 +1,38 @@
 import React from 'react'
 import SignupImage from '../../assets/images/work-force.png'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+import { apiSignup } from '../../services/auth';
 
 const Signup = () => {
+    const navigate = useNavigate();
+
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        try {
+            const response = await apiSignup(formData);
+            console.log(response.data, response)
+            alert(response.data)
+
+            localStorage.setItem("token", response.data.token)
+            localStorage.setItem("role", response.data.data.role)
+
+            const role = response.data.data.role;
+            if (role === "gigPoster") {
+                navigate("/dashboard")
+
+            } else {
+                navigate("/services/gigs")
+            }
+        } catch (error) {
+            console.log(error)
+            alert(
+                "SignUp failed " + (error?.data)
+            )
+        }
+    }
+
     return (
         <>
             <div className='bg-primary flex flex-col items-center justify-center'>
@@ -16,7 +46,7 @@ const Signup = () => {
                         <span className=' md:ml-35'>
                             <h2 className=' text-lg md:text-2xl text-black font-semibold'>Create Account</h2>
                         </span>
-                        <form className='flex flex-col gap-y-7 md:ml-35'>
+                        <form className='flex flex-col gap-y-7 md:ml-35' onSubmit={handleSignUp}>
                             {/* <div className='flex gap-x-4'>
                                 <div className="relative w-[45%] max-w-sm">
                                     <input type="text" id="firstName" name="firstName" className="border border-gray-300 rounded-md w-full pt-2 md:pt-3 pb-1 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required />
@@ -43,7 +73,7 @@ const Signup = () => {
                                     Email
                                 </label>
                             </div>
-                            
+
                             <div className="relative w-full max-w-[92.5%]">
                                 <select name="role" id='role'
                                     className="border border-gray-300 rounded-md w-full pt-2 md:pt-3 pb-1 px-4 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -77,8 +107,8 @@ const Signup = () => {
                         </form>
                         <div className='flex gap-y-2 md:ml-35'>
                             <Link to={'/login'}>
-                            <p className='font-nunito-sans text-md md:text-md lg:text:lg font-normal'>Already have an account? <span className='font-nunito-sans text-md md:text-md lg:text:lg font-bold underline hover:text-background transition-all'>Login</span>
-                            </p>
+                                <p className='font-nunito-sans text-md md:text-md lg:text:lg font-normal'>Already have an account? <span className='font-nunito-sans text-md md:text-md lg:text:lg font-bold underline hover:text-background transition-all'>Login</span>
+                                </p>
                             </Link>
                         </div>
                     </div>

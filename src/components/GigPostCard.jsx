@@ -1,19 +1,43 @@
 import { CalendarClockIcon, ClipboardCheckIcon, Clock, EarthIcon, MapPinIcon, PhoneIcon, SmartphoneIcon, User } from 'lucide-react'
 import React from 'react'
+import { Link } from 'react-router'
 
-const GigPostCard = () => {
+export const formatDateTime = (isoDateStr) => {
+    const date = new Date(isoDateStr);
+
+    const options = {
+        weekday: 'long',     // e.g. "Saturday"
+        year: 'numeric',
+        month: 'long',       // e.g. "April"
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,        // Use 24-hour time by setting this to false
+    };
+
+    return date.toLocaleString(undefined, options); // Uses the user's locale
+};
+
+const GigPostCard = ({ gig }) => {
+    
+
     return (
         <>
-            <div className='border-b border-gray-300 py-8'>
-                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 border-t-5 border-t-red-500">
+            <div className='border-b border-navyblue/20 py-8'>
+                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 border-t-5 border-t-red-500 font-nunito-sans">
+
+                    <div>
+
+                        <img src= {`${gig?.gigImageUrl}`} alt="" className='w-full h-50 object-cover object-center' />
+                    </div>
                     <div className="p-6">
                         {/* Gig Title */}
-                        <h2 className="text-xl font-bold text-gray-800 mb-2">Create a Modern UI Website</h2>
+                        <h2 className="text-xl font-bold text-gray-800 mb-2">{gig?.name}</h2>
 
                         <div className='flex items-center gap-x-2 mb-2 border border-gray-200 rounded-lg px-2'>
                             <div className='bg-gray-300 w-30 h-30 rounded-md shadow-md p-3 flex flex-col gap-x-3'>
-                                <h3 className='text-[15px] font-semibold text-gray-700'>Estimated Pay</h3>
-                                <span className="font-semibold text-green-600 flex justify-center text-4xl py-3">₵250</span>
+                                <h3 className='text-[14px] font-semibold text-gray-700'>Estimated Pay</h3>
+                                <span className="font-semibold text-green-600 flex justify-center text-4xl py-3">₵{gig?.gigProviderOfferPrice}</span>
                             </div>
                             <div className='p-3 flex flex-col gap-y-2 items-start'>
                                 <div className='flex items-center justify-center gap-x-2'>
@@ -22,11 +46,11 @@ const GigPostCard = () => {
                                 </div>
                                 <div className='flex items-center justify-center gap-x-2'>
                                     <CalendarClockIcon className='w-5 text-gray-600' />
-                                    <span className='text-sm text-gray-700'>Wed, 24th May, 2025 @7am</span>
+                                    <span className='text-sm text-gray-700'>{formatDateTime(gig?.gigOfferOpenWindow)}</span>
                                 </div>
                                 <div className='flex items-center justify-center gap-x-2'>
                                     <MapPinIcon className='w-5 text-gray-600' />
-                                    <span className='text-sm text-gray-700'>Accra</span>
+                                    <span className='text-sm text-gray-700'>{gig?.location}</span>
                                 </div>
                                 <div className='flex items-center justify-center gap-x-2'>
                                     <SmartphoneIcon className='w-5 text-gray-600' />
@@ -44,11 +68,11 @@ const GigPostCard = () => {
 
                         {/* Short Description */}
                         <p className="text-gray-600 text-sm mb-4">
-                            Looking for a frontend developer to build a modern responsive website for a fashion brand using React and Tailwind.
+                            {gig.description}
                         </p>
 
                         {/* Tags / Skills */}
-                        <div className="flex flex-wrap gap-2 text-xs mb-4">
+                        {/* <div className="flex flex-wrap gap-2 text-xs mb-4">
                             {["React", "TailwindCSS", "UI Design"].map((tag, index) => (
                                 <span
                                     key={index}
@@ -57,7 +81,7 @@ const GigPostCard = () => {
                                     #{tag}
                                 </span>
                             ))}
-                        </div>
+                        </div> */}
 
                         {/* Footer */}
                         <div className="flex items-center justify-between">
@@ -69,7 +93,7 @@ const GigPostCard = () => {
                                     className="w-10 h-10 rounded-full "
                                 />
                                 <div>
-                                    <p className="text-sm font-semibold text-gray-700">Emily J.</p>
+                                    <p className="text-sm font-semibold text-gray-700">{gig?.gigPoster?.userName}</p>
                                     <span className='flex items-center gap-x-1'>
                                         <h3 className='text-[#424f74]'>Just now.</h3>
                                         <EarthIcon className='h-4 w-4 text-gray-500' />
@@ -78,9 +102,9 @@ const GigPostCard = () => {
                             </div>
 
                             {/* Button */}
-                            <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <Link to={`${gig.id}`} className="bg-beige/80 text-navyblue text-sm font-bold px-4 py-2 rounded-lg hover:bg-beige transition hover:font-extrabold">
                                 View Details
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

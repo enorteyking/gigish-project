@@ -8,10 +8,10 @@ const GigWithBidCard = () => {
         <>
             <div>
                 <div className='border-b border-gray-300 py-8 '>
-                    <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 border-t-5 border-t-green-400 font-nunito-sans">
+                    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 border-t-5 border-t-green-400 font-nunito-sans">
                         <div>
 
-                            <img src={Image} alt="" className='w-full h-50 object-cover object-center' />
+                            <img src={`https://res.cloudinary.com/dz3lkhibn/image/upload/${gig.gigImageUrl}`} alt="" className='w-full h-50 object-cover object-center' />
                         </div>
                         <div className="px-6 py-4 font-nunito-sans">
 

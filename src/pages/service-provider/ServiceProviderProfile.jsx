@@ -7,11 +7,19 @@ import SubmitButton from '../../components/SubmitButton'
 import GigSearchBar from '../../components/GigSearchBar'
 import ProfileNavbar from '../../components/ProfileNavbar'
 import GigRightSideBar from '../../components/GigRightSideBar'
-import { formatDateTime } from '../../components/GigPostCard'
+import ServiceNavbar from '../../components/ServiceNavbar'
+import ServiceProfileNavbar from '../../components/ServiceProfileNavbar'
+import ServiceRightSideBar from '../../components/ServiceRightSideBar'
 
-const GigPosterProfile = () => {
-    const user = JSON.parse (localStorage.getItem('user'))
-
+const ServiceProviderProfile = () => {
+    const user = {
+        name: 'Emmanuel Nortey-King',
+        role: 'gigPoster',
+        email: 'emmanuel@example.com',
+        phone: '+233 123 456 789',
+        location: 'Accra, Ghana',
+        image: 'https://via.placeholder.com/120' // replace with real image URL
+    };
 
     return (
         <>
@@ -19,7 +27,7 @@ const GigPosterProfile = () => {
                 <div className=' w-[18.77%]'></div>
                 <div className=' w-[56%]'>
                     <div>
-                        <ProfileNavbar />
+                        <ServiceProfileNavbar />
                     </div>
                     <div className='bg-gray-50'>
                         <div className='h-45 r bg-[url(assets/images/image3.png)] bg-cover bg-gray-100 relative mb-3'>
@@ -34,9 +42,9 @@ const GigPosterProfile = () => {
                         </Link>
                         <div className='mx-5 mt-10 mb-22 font-nunito-sans flex flex-col gap-y-3'>
                             <div >
-                                <p className='text-sm md:text-xl lg:text-2xl font-bold leading-6'>{user.userName}</p>
-                                <p className='text-sm md:text-md lg:text-lg leading-7 text-gray-600'>Role: {user.role}</p>
-                                <p className='text-sm md:text-md lg:text-lg leading-7 text-gray-600'>Email: {user.email}</p>
+                                <p className='text-sm md:text-xl lg:text-2xl font-bold leading-6'>King</p>
+                                <p className='text-sm md:text-md lg:text-lg leading-7 text-gray-600'>Role: Gig Poster</p>
+                                <p className='text-sm md:text-md lg:text-lg leading-7 text-gray-600'>Email: nkingemma@gmail.com</p>
                             </div>
                             <div className='flex flex-wrap gap-x-5 items-center text-gray-500'>
                                 <div className='flex gap-x-1 items-center '>
@@ -45,14 +53,14 @@ const GigPosterProfile = () => {
                                 </div>
                                 <div className='flex gap-x-1 items-center '>
                                     <CalendarDays className='size-4 ' />
-                                    <p className='text-sm md:text-md lg:text-lg leading-7'>Joined {formatDateTime(user.createdAt)}</p>
+                                    <p className='text-sm md:text-md lg:text-lg leading-7'>Joined March, 2025</p>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <div className='flex border-b border-t w-[100%] border-gray-300 text-gray-800'>
-                                <Link to={'/dashboard/gigs'} className='text-center border-r border-gray-300 py-4 w-[50%] font-bold hover:bg-gray-200'>All Gigs</Link>
-                                <Link to={'/dashboard/bidded-gigs'} className='text-center py-4 w-[50%] font-bold hover:bg-gray-200'>Gigs with Bids</Link>
+                                <Link to={'/services/gigs'} className='text-center border-r border-gray-300 py-4 w-[50%] font-bold hover:bg-gray-200'>All Gigs</Link>
+                                <Link to={'/services/bidded-gigs'} className='text-center py-4 w-[50%] font-bold hover:bg-gray-200'>Gigs with Bids</Link>
                             </div>
                         </div>
                     </div>
@@ -65,7 +73,7 @@ const GigPosterProfile = () => {
                             style='py-3 px-5 bg-background md:text-md lg:text-md text-white hover:cursor-pointer hover:font-semibold hover:text-white hover:bg-primary absolute right-5 top-1.5' />
                     </div> */}
                     <div>
-                        <GigRightSideBar/>
+                        <ServiceRightSideBar/>
                     </div>
                 </div>
 
@@ -74,4 +82,4 @@ const GigPosterProfile = () => {
     )
 }
 
-export default GigPosterProfile
+export default ServiceProviderProfile;

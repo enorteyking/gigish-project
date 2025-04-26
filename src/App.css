@@ -3,9 +3,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #993909;
+  --color-primary: #3B82F6;
   --color-secondary: #ffdac4;
   --color-background: #ff6105;
+  --color-navyblue: #0A0F2C;
+  --color-beige: #ecd282;
+
   --font-nunito-sans: "Nunito Sans", sans-serif;
   --font-dm-serif: "DM Serif Display", serif;
   --font-syne-sans: "Syne", sans-serif;

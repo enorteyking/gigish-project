@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import DetailedGigPost from '../../components/ServiceDetailedGigPost'
 import { useParams } from 'react-router'
 import { apiSingleGig } from '../../services/gigs';
 import GigPosterNavbar from '../../components/GigPosterNavbar';
-import DetailedGigPost from '../../components/DetailedGigPost';
+import ServiceNavbar from '../../components/ServiceNavbar';
+import ServiceDetailedGigPost from '../../components/ServiceDetailedGigPost';
 
-const SingleGig = () => {
+const ServiceSingleGig = () => {
     const { id } = useParams();
     const [gig, setGig] = useState(null);
 
@@ -38,13 +40,14 @@ const SingleGig = () => {
                 </div>
                 <div className='w-[81.2%]'>
                     <div>
-                        <GigPosterNavbar/>
+                        <ServiceNavbar/>
                     </div>
                     <div className='flex  items-center w-[100%] h-screen md:w-[90%] mx-auto'>
 
-                        <DetailedGigPost 
-                        key={gig.id}
-                        gig={gig} />
+                        <ServiceDetailedGigPost
+                            key={gig.id}
+                            gig={gig}
+                        />
                     </div>
                 </div>
             </div>
@@ -53,4 +56,4 @@ const SingleGig = () => {
     )
 }
 
-export default SingleGig
+export default ServiceSingleGig

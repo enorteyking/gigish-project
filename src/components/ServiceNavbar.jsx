@@ -1,15 +1,16 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router'
 
-const GigPosterNavbar = () => {
-    return (
-        <div className=' bg-white/10 backdrop-opacity'>
+const ServiceNavbar = () => {
+  return (
+    <>
+    <div className=' bg-white/10 backdrop-opacity'>
             <div className='flex border-b w-[100%] border-gray-300'>
             <NavLink
-                    to="/dashboard/gigs"
+                    to="/services/gigs"
                     className={({ isActive }) =>
                         `text-center py-4 w-[50%] font-bold hover:bg-gray-200 ${
-                            isActive ? "bg-gray-300 text-navyblue font-bold" : ""
+                            isActive ? "bg-gray-300 text-navyblue font-bold" : "font-bold"
                         }`
                     }
                 >
@@ -18,10 +19,10 @@ const GigPosterNavbar = () => {
 
                 {/* NavLink for Gigs with Bids */}
                 <NavLink
-                    to="/dashboard/bidded-gigs"
+                    to="/services/bidded-gigs"
                     className={({ isActive }) =>
                         `text-center py-4 w-[50%] font-bold hover:bg-gray-200 ${
-                            isActive ? "bg-gray-300 text-navyblue font-bold" : ""
+                            isActive ? "bg-gray-300 text-navyblue font-bold" : "font-bold"
                         }`
                     }
                 >
@@ -30,7 +31,8 @@ const GigPosterNavbar = () => {
 
             </div>
         </div>
-    )
+    </>
+  )
 }
 
-export default GigPosterNavbar
+export default ServiceNavbar

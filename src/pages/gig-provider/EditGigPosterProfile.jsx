@@ -1,33 +1,16 @@
-import { useState } from 'react';
+import React from 'react'
 import { XIcon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
-import { apiCreateGig } from '../../services/gigs';
 
 
-export default function CreateGig() {
- const navigate = useNavigate ();
 
- const handleCreateGig = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    try {
-        const response = await apiCreateGig (formData);
-        console.log("Gig created successfully", response);
-
-        navigate("/dashboard/gigs")
-        alert ("Gig created succesfully", response.data.message)
-    } catch (error) {
-        alert ("Creating a gig failed" + (error.response?.data?.message || error.message))
-    }
- }
-
-    return (
-        <div className="p-4">
+const EditGigPosterProfile = () => {
+  return (
+    <>
+    <div className="p-4">
                 <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50  p-4 shadow-lg">
                 <div className="bg-white p-6 rounded shadow-lg w-[70%] relative">
-                  <h2 className="text-xl font-bold mb-4 text-center text-navyblue font-nunito-sans">Create a Gig</h2>
+                  <h2 className="text-xl font-bold mb-4 text-center text-navyblue font-nunito-sans">Edit Profile</h2>
   
                   <form className="flex flex-col gap-y-6 w-[90%] mx-auto " onSubmit={handleCreateGig}>
                     <div className="relative">
@@ -98,5 +81,8 @@ export default function CreateGig() {
                 </div>
               </div>
         </div>
-    );
+    </>
+  )
 }
+
+export default EditGigPosterProfile

@@ -2,25 +2,43 @@ import { Clock, LocateIcon, MapPin, StarIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import GigPosterNavbar from './GigPosterNavbar'
 import { formatDateTime } from './GigPostCard'
-import { Link } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
+import { apiCreateBid } from '../services/bids'
 
-const DetailedGigPost = ({ gig }) => {
+const ServiceDetailedGigPost = ({ gig }) => {
+    const navigate = useNavigate();
+    const [showForm, setShowForm] = useState(false);
 
-    const [showList, setShowList] = useState(false);
-console.log(gig)
     const handleToggleForm = () => {
-        setShowList(prev => !prev);
-    };
-    console.log(showList);
-
-    const handleAccept = (id) => {
-        alert(`Accepted request ID: ${id}`);
+        setShowForm(prev => !prev);
     };
 
-    const handleReject = (id) => {
-        alert(`Rejected request ID: ${id}`);
-    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
+        // Extract the bid price from the form
+        const serviceProviderBidPrice = event.target.serviceProviderBidPrice.value;
+
+        // Prepare the data as JSON
+        const data = {
+            serviceProviderBidPrice: parseFloat(serviceProviderBidPrice), // Convert to a number if needed
+        };
+
+        try {
+            const response = await apiCreateBid(gig?.id, data);
+            console.log(response.data.message, response)
+
+            navigate("/services/gigs")
+            alert("Bid submitted successfully")
+        } catch (error) {
+            alert(
+                "Bid submission failed: " + (error.response?.data || error?.data || error.message)
+            )
+        }
+        console.log("Form submitted with value:", serviceProviderBidPrice);
+        // Add your form submission logic here (e.g., API call)
+
+    }
     return (
         <>
 
@@ -104,48 +122,39 @@ console.log(gig)
                     {/* CTA */}
                     <div className="flex gap-4">
                         <button className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm hover:bg-blue-700 transition" onClick={handleToggleForm}>
-                            View Bids
+                            Bid for This Gig
                         </button>
-                        
+                        {showForm && (
+                            <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+                                <div className='relative '>
+                                    <input
+                                        type="number"
+                                        id='serviceProviderBidPrice'
+                                        name="serviceProviderBidPrice"
+                                        placeholder="Enter your offer pay"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navyblue"
+                                        defaultValue={gig?.gigProviderOfferPrice}
+                                        required
+                                    /><label htmlFor="serviceProviderBidPrice" className="absolute left-3 -top-3 font-semibold bg-white px-2 text-sm md:text-sm lg:text-[14px] text-gray-500 font-nunito-sans">
+                                        Enter your offer pay
+                                    </label>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                        )}
                         <button className="border border-blue-600 text-blue-600 px-6 py-2 rounded-lg text-sm hover:bg-blue-50 transition">
                             Contact Client
                         </button>
                     </div>
-                    {showList && (
-                            <div className="mt-4 space-y-3">
-                                {gig?.gigBids.length > 0 && gig?.gigBids.map((gigBid) => (
-                                    <div
-                                        key={gigBid?.id}
-                                        className="border rounded p-4 flex items-center justify-between bg-white shadow"
-                                    >
-                                        <div>
-                                            <h3 className="text-lg font-semibold">John Mawuli</h3>
-                                            <p className="text-sm text-gray-600">Status: Pending</p>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <button
-                                                onClick={() => handleAccept(gigBid?.id)}
-                                                className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                                            >
-                                                Accept
-                                            </button>
-                                            <button
-                                                onClick={() => handleReject(gigBid?.id)}
-                                                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                                            >
-                                                Reject
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        {showList && gig.gigBids.length > 0 && <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, eius.</div>}
-                        
                 </div>
             </div>
         </>
     )
 }
 
-export default DetailedGigPost
+export default ServiceDetailedGigPost

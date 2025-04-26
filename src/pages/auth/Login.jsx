@@ -1,10 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SignupImage from '../../assets/images/work-force.png'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import SubmitButton from '../../components/SubmitButton'
+import { apiLogin } from '../../services/auth'
+
 
 
 const Login = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const isEmail = (value) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+  const inputType = isEmail(inputValue) ? "email" : "text";
+  const inputName = isEmail(inputValue) ? "email" : "userName";
+
+  const navigate = useNavigate();
+
+const handleLogin = async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData (event.target)
+
+  try {
+    const response = await apiLogin(formData)
+    console.log (response.data.message, response)
+
+    localStorage.setItem ("token", response.data.token)
+    localStorage.setItem ("role", response.data.data.role)
+    localStorage.setItem ("user", JSON.stringify(response.data.data))
+
+    
+
+    const role = response.data.data.role
+    if (role === "gigPoster") {
+      navigate("/dashboard")
+    } else {
+      navigate("/services/gigs")
+    }
+
+  } catch (error) {
+    alert (
+      "SignUp failed: " + (error.response?.data || error?.data || error.message)
+  )
+  }
+  
+}
+
+
   return (
     <>
       <div className='bg-primary h-screen flex flex-col items-center'>
@@ -14,10 +57,10 @@ const Login = () => {
             <span className=' md:mr-30 text-start px-5'>
               <h2 className=' text-lg md:text-2xl text-white font-semibold'>Login</h2>
             </span>
-            <form className='flex flex-col gap-y-7 md:mr-30 justify-center items-center'>
+            <form className='flex flex-col gap-y-7 md:mr-30 justify-center items-center' onSubmit={handleLogin}>
               <div className="relative w-full max-w-[92.5%]">
-                <input type="email" id="email" name="email" className="border border-gray-300 rounded-md w-full pt-2 md:pt-3 pb-1 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required />
-                <label htmlFor="email" className="absolute left-3 -top-3 bg-background px-2 text-sm md:text-md lg:text-[16px] text-white">
+                <input type={inputType} name={inputName} id="emailUserName"  className="border border-gray-300 rounded-md w-full pt-2 md:pt-3 pb-1 px-4 focus:outline-none focus:ring-2 focus:ring-primary" required onChange={(e) => setInputValue(e.target.value)} />
+                <label htmlFor="emailUserName" className="absolute left-3 -top-3 bg-background px-2 text-sm md:text-md lg:text-[16px] text-white">
                   Username or Email
                 </label>
               </div>
@@ -36,11 +79,11 @@ const Login = () => {
               <div className='flex flex-col gap-y-3 md:flex-row md:gap-x-8 items-center w-full max-w-[92.5%] '>
               <SubmitButton 
               text={'Login'}
-              style='py-3 px-4 w-[100%] bg-white/80 text-black/60 hover:font-bold hover:text-black/70 hover:bg-white/65'
+              style='py-3 px-4 w-[100%] bg-white/80 text-black/60 hover:font-bold hover:text-white hover:bg-primary hover:cursor-pointer'
               />
               {/* <SubmitButton 
               text={'Login to offer service'}
-              style='bg-transparent py-2.5 px-4 border border-white/50 border-2 text-white/70 hover:font-bold hover:text-white/70 hover:border-white/80 hover:bg-black/20 transition ease duration:50'
+              style='bg-transparent py-2.5 px-4 border border-white/50 border-2 text-white/70 hover:font-bold hover:text-white hover:border-white/80 hover:bg-primary transition ease duration:50'
               /> */}
               
               </div>

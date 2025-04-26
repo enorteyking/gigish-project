@@ -4,8 +4,11 @@ import GigPosterNavbar from '../../components/GigPosterNavbar'
 const AllBiddedGigs = () => {
   return (
     <>
-    <div>
-        <div>
+    <div className='flex'>
+        <div className='w-[18.77%]'>
+
+        </div>
+        <div className='w-[81.2%]'>
             <GigPosterNavbar/>
         </div>
     </div>
