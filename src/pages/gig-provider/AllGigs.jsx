@@ -20,6 +20,7 @@ const AllGigs = () => {
 
             // Ensure response.data.data is defined and is an array
             const gigsData = Array.isArray(response.data.data) ? response.data.data : [];
+           localStorage.setItem("gigData", JSON.stringify(gigsData)); // Store the gigs data in localStorage
             const loginUser =JSON.parse(localStorage.getItem("user"));
             console.log("Gigs Data:", gigsData);
             console.log("Login User:", loginUser);

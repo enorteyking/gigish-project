@@ -19,7 +19,7 @@ const ServiceNavbar = () => {
 
                 {/* NavLink for Gigs with Bids */}
                 <NavLink
-                    to="/services/bidded-gigs"
+                    to="/services/gigs/bidded-gigs"
                     className={({ isActive }) =>
                         `text-center py-4 w-[50%] font-bold hover:bg-gray-200 ${
                             isActive ? "bg-gray-300 text-navyblue font-bold" : "font-bold"

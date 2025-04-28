@@ -11,10 +11,10 @@ export const apiCreateBid = async (id, data) => {
 
 export const apiGetAllBids = async () =>  apiClient.get("/viewBids");
 
-export const apiAcceptBid = async () =>  apiClient.post(`/acceptBid/${id}`);
+export const apiAcceptBid = async (id) =>  apiClient.post(`/acceptBid/${id}`);
 
-export const apiRejectBid = async () =>  apiClient.post(`/rejectBid/${id}`);
+export const apiRejectBid = async (id) =>  apiClient.post(`/rejectBid/${id}`);
 
-export const apiDeleteBid = async () =>  apiClient.delete(`/delectBid/${id}`);
+export const apiDeleteBid = async (id) =>  apiClient.delete(`/delectBid/${id}`);
 
 

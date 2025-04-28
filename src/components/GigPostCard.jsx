@@ -1,6 +1,7 @@
 import { CalendarClockIcon, ClipboardCheckIcon, Clock, EarthIcon, MapPinIcon, PhoneIcon, SmartphoneIcon, User } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router'
+import Profile from "../assets/images/profile-image.png"
 
 export const formatDateTime = (isoDateStr) => {
     const date = new Date(isoDateStr);
@@ -40,10 +41,6 @@ const GigPostCard = ({ gig }) => {
                                 <span className="font-semibold text-green-600 flex justify-center text-4xl py-3">₵{gig?.gigProviderOfferPrice}</span>
                             </div>
                             <div className='p-3 flex flex-col gap-y-2 items-start'>
-                                <div className='flex items-center justify-center gap-x-2'>
-                                    <User className='w-5 text-gray-600' />
-                                    <span className='text-sm text-gray-700'>Web Designer</span>
-                                </div>
                                 <div className='flex items-center justify-center gap-x-2'>
                                     <CalendarClockIcon className='w-5 text-gray-600' />
                                     <span className='text-sm text-gray-700'>{formatDateTime(gig?.gigOfferOpenWindow)}</span>
@@ -88,7 +85,7 @@ const GigPostCard = ({ gig }) => {
                             {/* Posted by */}
                             <div className="flex items-center space-x-2">
                                 <img
-                                    src="https://i.pravatar.cc/40?img=3"
+                                    src={Profile}
                                     alt="avatar"
                                     className="w-10 h-10 rounded-full "
                                 />

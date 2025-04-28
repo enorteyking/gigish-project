@@ -17,6 +17,7 @@ const Signup = () => {
 
             localStorage.setItem("token", response.data.token)
             localStorage.setItem("role", response.data.data.role)
+            localStorage.setItem ("user", JSON.stringify(response.data.data))
 
             const role = response.data.data.role;
             if (role === "gigPoster") {
@@ -27,20 +28,18 @@ const Signup = () => {
             }
         } catch (error) {
             console.log(error)
-            alert(
-                "SignUp failed " + (error?.data)
-            )
         }
     }
 
     return (
         <>
-            <div className='bg-primary flex flex-col items-center justify-center'>
-                <div className='bg-background w-[90%] md:w-[70%]  mx-auto grid grid-col-1 md:grid-cols-3 rounded-2xl shadow-2xl shadow-black/80'>
-                    <div className='bg-background rounded-2xl py-10 px-3'>
-                        <h2 className='font-nunito-sans text-center text-lg md:text-2xl text-white font-semibold'>Making gigs the new ish</h2>
+            <div className='bg-navyblue h-screen flex flex-col items-center justify-center'>
+                <div className='bg-gray-500 w-[90%] md:w-[70%]  mx-auto grid grid-col-1 md:grid-cols-3 rounded-2xl shadow-2xl shadow-black/80'>
+                    <div className='bg-gray-500 rounded-2xl py-10 px-3'>
+                        <h2 className='font-nunito-sans text-center text-lg md:text-3xl text-white font-bold'>Welcome to GigIsh</h2>
+                        <h2 className='font-syne-sans text-center text-lg md:text-xl text-white'>Making Gigs the new Ish</h2>
                     </div>
-                    <img src={SignupImage} alt="" className='w-[35%] h-85 absolute left-20 bottom-10 rotate-x-30 rotate-y-0' />
+                    <img src={SignupImage} alt="" className='w-[35%] h-95 absolute left-20 bottom-10 rotate-x-30 rotate-y-0' />
                     {/* The form part */}
                     <div className='flex flex-col space-y-7 bg-white font-nunito-sans md:col-span-2 rounded-2xl justify-center py-10'>
                         <span className=' md:ml-35'>
@@ -102,7 +101,7 @@ const Signup = () => {
                             </div>
 
 
-                            <button type="submit" className='bg-primary/85 w-full max-w-[92.5%] p-1 md:p-2  rounded-md text-white font-semibold text-sm md:text-md lg:text-lg hover:bg-primary font-syne hover:font-bold'>Create Account</button>
+                            <button type="submit" className=' w-full max-w-[92.5%] p-1 md:p-2 py-3 px-4 hover:bg-navyblue active:bg-beige active:text-navyblue hover:text-beige font-bold text-sm md:text-lg lg:text-xl font-nunito-sans rounded text-navyblue hover:font-extrabold transition border border-navyblue'>Create Account</button>
 
                         </form>
                         <div className='flex gap-y-2 md:ml-35'>

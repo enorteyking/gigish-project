@@ -20,6 +20,8 @@ import ServiceProviderProfile from './pages/service-provider/ServiceProviderProf
 import ServiceSingleGig from './pages/service-provider/ServiceSingleGig'
 import EditGigPosterProfile from './pages/gig-provider/EditGigPosterProfile'
 import ServiceEditProfile from './pages/service-provider/ServiceEditProfile'
+import ServiceBiddedGigs from './pages/service-provider/ServiceBiddedGigs'
+import ServiceBidsOffers from './pages/service-provider/ServiceBidsOffers'
 
 function App() {
 
@@ -34,6 +36,8 @@ function App() {
 
             <Route path='/services/gigs' element={<ServiceProviderLayout />}>
             <Route index={true} element={<ServiceAllGigs />} />
+            <Route path='bidded-gigs' element={<ServiceBiddedGigs />} />
+            <Route path='bids' element={<ServiceBidsOffers />} />
             <Route path=':id' element={<ServiceSingleGig />} />
             <Route path=':id/create-bid' element={<CreateOffer />} />
             <Route path='profile' element={<ServiceProviderProfile />} />

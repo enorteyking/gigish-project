@@ -4,6 +4,8 @@ import { Link, NavLink } from "react-router";
 import { CrossIcon, XIcon } from 'lucide-react';
 import CreateGig from '../pages/gig-provider/CreateGig';
 import Logo from '../assets/images/transparent-logo.png'
+import ProfileNavbar from './ProfileNavbar';
+import Profile from '../assets/images/profile-image.png'
 
 const GigSidebar = () => {
   const user = JSON.parse(localStorage.getItem('user'))
@@ -44,7 +46,7 @@ const GigSidebar = () => {
         </div>
 
         <Link to={'/dashboard/profile'} className='relative flex gap-x-3 px-3 py-2 mt-auto justify-start items-center hover:bg-gray-700/50 rounded-full'>
-                  <img src="" alt="" className='w-13 h-13 rounded-full bg-gray-300' />
+                  <img src= {Profile} alt="" className='w-13 h-13 rounded-full bg-gray-300' />
                   <div className='flex flex-col'>
                     <h3 className='font-semibold font-nunito-sans text-white'>{user.userName}</h3>
                     <h3 className='font-nunito-sans text-gray-600 text-md'>{user.role}</h3>

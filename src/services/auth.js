@@ -12,6 +12,10 @@ export const apiSwitchRole = async(payload) => {
     return apiClient.patch("/switchRole", payload)
 };
 
-export const apiSUpdateUser = async(payload) => {
-    return apiClient.patch("/updateUser", payload)
+export const apiUpdateUser = async(payload) => {
+    return apiClient.patch("/updateUser", payload, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
 };

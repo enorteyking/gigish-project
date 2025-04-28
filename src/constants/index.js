@@ -1,4 +1,5 @@
 import { 
+    BellDotIcon,
     BookOpenCheck, 
     BriefcaseBusiness, 
     ChartNoAxesCombined, 
@@ -11,14 +12,9 @@ import {
 
 export const NAVLINKS = [
     {
-        name: "Home",
-        path: "/dashboard",
-        icon: Home,
-    },
-    {
         name: "My Gigs",
         path: "/dashboard/gigs",
-        icon: FileIcon,
+        icon: Home,
     },
     {
         name: "Bidded Gigs",
@@ -29,6 +25,11 @@ export const NAVLINKS = [
         name: "Profile",
         path: "/dashboard/profile",
         icon: UserIcon,
+    },
+    {
+        name: "Notiffications",
+        path: "/dashboard/notifications",
+        icon: BellDotIcon,
     },
     {
         name: "Settings",
@@ -50,14 +51,20 @@ export const SERVICEPROVIDERLINKS = [
     },
     {
         name: "Bidded Gigs",
-        path: "/services/bidded-gigs", // Updated path to avoid conflict
+        path: "/services/gigs/bidded-gigs", // Updated path to avoid conflict
         icon: BriefcaseBusiness,
+    },
+    {
+        name: "Notiffications",
+        path: "/dashboard/notifications",
+        icon: BellDotIcon,
     },
     {
         name: "Profile",
         path: "/services/gigs/profile",
         icon: UserIcon,
     },
+    
     {
         name: "Settings",
         path: "/services/gigs/settings",

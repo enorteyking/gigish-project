@@ -4,6 +4,7 @@ import GigPosterNavbar from './GigPosterNavbar'
 import { formatDateTime } from './GigPostCard'
 import { Link, useNavigate, useParams } from 'react-router'
 import { apiCreateBid } from '../services/bids'
+import Profile from '../assets/images/profile-image.png'
 
 const ServiceDetailedGigPost = ({ gig }) => {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ const ServiceDetailedGigPost = ({ gig }) => {
 
                     <div className='flex items-center mt-6 gap-x-3'>
                         <img
-                            src="https://i.pravatar.cc/50?img=5"
+                            src={Profile}
                             className="w-15 h-15 rounded-full"
                             alt="Client Avatar"
                         />

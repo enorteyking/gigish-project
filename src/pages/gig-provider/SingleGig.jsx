@@ -40,7 +40,7 @@ const SingleGig = () => {
                     <div>
                         <GigPosterNavbar/>
                     </div>
-                    <div className='flex  items-center w-[100%] h-screen md:w-[90%] mx-auto'>
+                    <div className='flex  items-center w-[100%] my-10 md:w-[90%] mx-auto'>
 
                         <DetailedGigPost 
                         key={gig.id}
